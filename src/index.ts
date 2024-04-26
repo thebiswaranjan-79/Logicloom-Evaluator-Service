@@ -1,7 +1,9 @@
 import express, {Express} from "express";
+import serverConfig from "./config/serverConfig";
 
 const app:Express = express();
 
-app.listen(3000, ()=>{
-    console.log("Server Started at Port 3000");
+app.listen(serverConfig.PORT, ()=>{
+    console.log(`Server Started at *: ${serverConfig.PORT}`);
+    console.log("Wow");
 })

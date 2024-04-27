@@ -6,6 +6,6 @@ import apiRouter from "./routes";
 const app: Express = express();
 
 app.use('/api', apiRouter);
-app.listen(3000, () => {
-  console.log(`Server started at *:3000`);
+app.listen(4000, () => {
+  console.log(`Server started at *:4000`);
 });

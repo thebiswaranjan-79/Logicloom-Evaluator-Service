@@ -25,6 +25,14 @@ app.listen(4000, () => {
 
   sampleWorker("SampleQueue");
 
-  const code = `print('hello')`;
-  runPython(code);
+  const code = `x = input()
+  y = input()
+  print("value of x is", x)
+  print("value of y is", y)
+  `;
+  const inputCase = `100
+  200
+  `;
+
+  runPython(code, inputCase);
 });

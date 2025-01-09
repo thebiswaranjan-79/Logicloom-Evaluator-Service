@@ -3,6 +3,7 @@
 import { PYTHON_IMAGE } from '../utils/constants';
 import createContainer from './containerFactory';
 import decodeDockerStream from './dockerHelper';
+
 async function runPython(code: string, inputTestCase: string) {
     const rawLogBuffer: Buffer[] = [];
     console.log("Initialising a new python docker container");
@@ -28,13 +29,16 @@ async function runPython(code: string, inputTestCase: string) {
     loggerStream.on('data', (chunk) => {
         rawLogBuffer.push(chunk);
     });
-    loggerStream.on('end', () => {
-        console.log(rawLogBuffer);
-        const completeBuffer = Buffer.concat(rawLogBuffer);
-        const decodedStream = decodeDockerStream(completeBuffer);
-        console.log(decodedStream);
-        console.log(decodedStream.stdout);
+    await new Promise((res) => {
+      loggerStream.on('end', () => {
+          console.log(rawLogBuffer);
+          const completeBuffer = Buffer.concat(rawLogBuffer);
+          const decodedStream = decodeDockerStream(completeBuffer);
+          console.log(decodedStream);
+          console.log(decodedStream.stdout);
+          res(decodeDockerStream);
+      });
     });
-    return pythonDockerContainer;
+    await pythonDockerContainer.remove();
 }       
 export default runPython;

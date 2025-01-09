@@ -6,7 +6,6 @@ import serverConfig from "./config/serverConfig";
 // import runPython from "./containers/runPythonDocker";
 // import runCpp from "./containers/runCpp";
 
-import submissionQueueProducer from "./producers/submissionQueueProducer";
 
 import apiRouter from "./routes";
 import { submission_queue } from "./utils/constants";
@@ -44,42 +43,42 @@ app.listen(4000, () => {
 
   // runPython(code, inputCase);
 
-  const userCode = `
+//   const userCode = `
   
-  class Solution {
-    public:
-    vector<int> permute() {
-        vector<int> v;
-        v.push_back(10);
-        return v;
-    }
-  };
-`;
-const code = `
-#include<iostream>
-#include<vector>
-#include<stdio.h>
-using namespace std;
+//   class Solution {
+//     public:
+//     vector<int> permute() {
+//         vector<int> v;
+//         v.push_back(10);
+//         return v;
+//     }
+//   };
+// `;
+// const code = `
+// #include<iostream>
+// #include<vector>
+// #include<stdio.h>
+// using namespace std;
 
-${userCode}
-int main() {
-  Solution s;
-  vector<int> result = s.permute();
-  for(int x : result) {
-    cout<<x<<" ";
-  }
-  cout<<endl;
-  return 0;
-}
-`;
+// ${userCode}
+// int main() {
+//   Solution s;
+//   vector<int> result = s.permute();
+//   for(int x : result) {
+//     cout<<x<<" ";
+//   }
+//   cout<<endl;
+//   return 0;
+// }
+// `;
 
-  const inputCase = `10`
+  // const inputCase = `10`
 
-  submissionQueueProducer({"1234": {
-    language: "CPP",
-    inputCase,
-    code
-  }});
+  // submissionQueueProducer({"1234": {
+  //   language: "CPP",
+  //   inputCase,
+  //   code
+  // }});
   // runCpp(code, inputCase);
 
 });

@@ -5,8 +5,13 @@ import { JAVA_IMAGE } from '../utils/constants';
 import createContainer from './containerFactory';
 import decodeDockerStream from './dockerHelper';
 import pullImage from './pullImage';
+
+
 class JavaExecutor implements CodeExecutorStrategy {
-    async execute(code: string, inputTestCase: string): Promise<ExecutionResponse> {
+    async execute(code: string, inputTestCase: string, outputCase: string): Promise<ExecutionResponse> {
+        console.log("Java executor called");
+        console.log(code, inputTestCase, outputCase);
+
         const rawLogBuffer: Buffer[] = [];
         await pullImage(JAVA_IMAGE);
         console.log("Initialising a new java docker container");
